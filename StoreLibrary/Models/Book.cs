@@ -1,4 +1,5 @@
-﻿using StoreLibrary.Areas.Identity.Data;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StoreLibrary.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,9 @@ namespace CodeWEB.Models
         public int? StoreId { get; set; }
         public Store? Store { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
+
+        [NotMapped]
+        public List<SelectListItem>? CategoryList { get; set; }
 
     }
 }

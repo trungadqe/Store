@@ -18,16 +18,7 @@ namespace StoreLibrary.Controllers
         private readonly StoreLibraryContext _context;
         private readonly UserManager<StoreLibraryUser> _userManager;
         private readonly StoreLibraryContext dbcontext;
-        public List<SelectListItem> Category { get; } = new List<SelectListItem>
-          {
-              new SelectListItem { Value = "Action and Adventure", Text = "Action and Adventure" },
-              new SelectListItem { Value = "Classics", Text = "Classics" },
-              new SelectListItem { Value = "Comic Book", Text = "Comic Book" },
-              new SelectListItem { Value = "Novel", Text = "Novel" },
-              new SelectListItem { Value = "Detective", Text = "Detective" },
-              new SelectListItem { Value = "Mystery", Text = "Mystery" },
-              new SelectListItem { Value = "Fantasy", Text = "Fantasy" }
-          };
+
 
         public BooksController(StoreLibraryContext context, UserManager<StoreLibraryUser> userManager, StoreLibraryContext dbcontext)
         {
@@ -83,6 +74,19 @@ namespace StoreLibrary.Controllers
         [Authorize(Roles = "Seller")]
         public IActionResult Create()
         {
+            Book book = new Book()
+            {
+                CategoryList = new List<SelectListItem>
+                {
+                      new SelectListItem { Value = "Action and Adventure", Text = "Action and Adventure" },
+                      new SelectListItem { Value = "Classics", Text = "Classics" },
+                      new SelectListItem { Value = "Comic Book", Text = "Comic Book" },
+                      new SelectListItem { Value = "Novel", Text = "Novel" },
+                      new SelectListItem { Value = "Detective", Text = "Detective" },
+                      new SelectListItem { Value = "Mystery", Text = "Mystery" },
+                      new SelectListItem { Value = "Fantasy", Text = "Fantasy" },
+                }
+            };
             var userId = _userManager.GetUserId(HttpContext.User);
             var store = _context.Store
                 .Include(s => s.User)
@@ -93,7 +97,6 @@ namespace StoreLibrary.Controllers
             }
             var id = store.Id;
             ViewData["StoreId"] = new SelectList(_context.Store.Where(c => c.Id == store.Id), "Id", "Id");
-            ViewData["Category"] = new SelectList(_context.Book, "Category", "Category");
             return View();
         }
 

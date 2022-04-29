@@ -27,42 +27,11 @@
                 <input asp-for="Author" class="form-control" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
-            <div class="form-group
-+">
-                <label asp-for="Category"></label>
-                <select asp-for="Category" asp-items="ViewBag.Category" class="form-control"></select>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" asp-items="@Model.CategoryList" class="form-control"></select>
+                <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-
-            @*<div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <select asp-for="Category" class ="form-control" asp-items="ViewBag.Category"></select>
-                </div>*@
-            @*<div>
-                <label asp-for=Category class="form-label"> Category </label>
-                <select asp-for="Category" class="form-control">
-                <option>Action and Adventure</option>
-                <option>Classics</option>
-                <option>Comic</option>
-                <option>Novel</option>
-                <option>Detective</option>
-                <option>Mystery</option>
-                <option>Fantasy</option>
-                <option>Historical</option>
-                <option>Horror</option>
-                <option>Self Help</option>
-                </select>
-                <span asp-validation-for="Category" class="text-danger"></span>
-                </div>*@
-            @*<div class="form-group">
-                <label asp-for="Category"class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <select asp-for="Category" class="form-control"></select>
-                </div>*@
-            @*<div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-                </div>*@
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
@@ -73,11 +42,11 @@
                 <input asp-for="Desc" class="form-control" />
                 <span asp-validation-for="Desc" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="ImgUrl" class="control-label"></label>
                 <input asp-for="ImgUrl" class="form-control" />
                 <span asp-validation-for="ImgUrl" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="StoreId" class="control-label"></label>
                 <select asp-for="StoreId" class="form-control" asp-items="ViewBag.StoreId"></select>
