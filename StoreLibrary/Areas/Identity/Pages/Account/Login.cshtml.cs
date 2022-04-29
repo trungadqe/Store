@@ -122,7 +122,7 @@ namespace StoreLibrary.Areas.Identity.Pages.Account
                     var rolesname = await _userManager.GetRolesAsync(userName);
                     if (rolesname.Contains("Customer"))
                     {
-                        return RedirectToAction("UserIndex", "Home", new { area = "" });
+                        return RedirectToAction("UserIndex", "Book", new { area = "" });
                     }
                     if (rolesname.Contains("Seller"))
                     {

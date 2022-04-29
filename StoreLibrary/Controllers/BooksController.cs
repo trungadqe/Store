@@ -74,6 +74,15 @@ namespace StoreLibrary.Controllers
         [Authorize(Roles = "Seller")]
         public IActionResult Create()
         {
+            Book book = new Book()
+            {
+                CategoryList = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "Comic", Text = "Comic"},
+                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
+                }
+            };
+
             var userId = _userManager.GetUserId(HttpContext.User);
             var store = _context.Store
                 .Include(s => s.User)
@@ -83,8 +92,10 @@ namespace StoreLibrary.Controllers
                 return RedirectToAction("Create", "Stores", new { area = "" });
             }
             var id = store.Id;
-            ViewData["StoreId"] = new SelectList(_context.Store.Where(c => c.Id == store.Id), "Id", "Id");
-            return View();
+            
+            //ViewData["StoreId"] = new SelectList(_context.Store.Where(c => c.Id == store.Id), "Id", "Id");
+            
+            return View(book);
         }
 
         // POST: Books/Create

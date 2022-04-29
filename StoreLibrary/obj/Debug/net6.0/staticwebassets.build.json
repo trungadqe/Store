@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VnOyuD5ae8BYDLkkupW+yB4k9eyR+Tfif39BOnbQKLM=",
+  "Hash": "yGHWu4v/m43/uNxmpMvaPoZnhiB4PUqo0xuKE21JdIc=",
   "Source": "StoreLibrary",
   "BasePath": "_content/StoreLibrary",
   "Mode": "Default",
@@ -1324,6 +1324,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\wwwroot\\img\\12312312.jpg",
+      "SourceId": "StoreLibrary",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\wwwroot\\",
+      "BasePath": "_content/StoreLibrary",
+      "RelativePath": "img/12312312.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\12312312.jpg"
     },
     {
       "Identity": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\wwwroot\\img\\2.jpg",
