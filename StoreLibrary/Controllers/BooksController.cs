@@ -19,7 +19,6 @@ namespace StoreLibrary.Controllers
         private readonly UserManager<StoreLibraryUser> _userManager;
         private readonly StoreLibraryContext dbcontext;
 
-
         public BooksController(StoreLibraryContext context, UserManager<StoreLibraryUser> userManager, StoreLibraryContext dbcontext)
         {
             this.dbcontext = dbcontext;
@@ -28,24 +27,40 @@ namespace StoreLibrary.Controllers
         }
         public async Task<IActionResult> UserIndexAsync()
         {
-            var storeLibraryContext = _context.Book.Include(b => b.Store);
-            return View(await storeLibraryContext.ToListAsync());
+            var Book = _context.Book.Include(b => b.Store);
+            return View(await Book.ToListAsync());
         }
         public async Task<IActionResult> UserSearch(string searchString = "")
         {
             ViewData["CurrentFilter"] = searchString;
+            Book book = new Book()
+            {
+                CategoryList = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "Comic", Text = "Comic"},
+                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
+                }
+            };
             var books = from s in dbcontext.Book
                         .Include(s => s.Store)
                         select s;
             books = books.Where(s => s.Title.Contains(searchString));
             List<Book> booksList = await books.ToListAsync();
             /*ViewData["Category"] = SelectListItem(Category);*/
-            return View(books);
+            return View(book);
         }
 
         // GET: Books
         public async Task<IActionResult> Index()
         {
+            Book book = new Book()
+            {
+                CategoryList = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "Comic", Text = "Comic"},
+                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
+                }
+            };
             var userid = _userManager.GetUserId(HttpContext.User);
             var storeLibraryContext = _context.Book.Include(b => b.Store);
             return View(await storeLibraryContext.ToListAsync());
@@ -82,7 +97,6 @@ namespace StoreLibrary.Controllers
                     new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
                 }
             };
-
             var userId = _userManager.GetUserId(HttpContext.User);
             var store = _context.Store
                 .Include(s => s.User)

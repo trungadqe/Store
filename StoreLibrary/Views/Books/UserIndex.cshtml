@@ -230,6 +230,7 @@
 												<p>@book.Desc</p>
 											</div>
 											<strong class="tg-bookcategory">Category: @book.Category</strong>
+											<strong class="tg-bookcategory">Pages: @book.Pages </strong>
 											<strong class="tg-bookprice">Price: @book.Price</strong>											
 										</div>
 									</figure>
@@ -237,7 +238,8 @@
 										<div class="tg-booktitle">
 											<h3><a href="javascript:void(0);">@book.Title</a></h3>
 										</div>
-										<span class="tg-bookwriter">By: <a href="javascript:void(0);">@book.Author</a></span>
+										<span class="tg-bookwriter"><a href="javascript:void(0);">By Author: @book.Author</a></span>
+										<span class="tg-bookwriter"><a href="javascript:void(0);">By Store: @book.Store.Name</a></span>
 										<a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
 											<i class="fa fa-shopping-basket"></i>
 											<em>Add To Basket</em>
