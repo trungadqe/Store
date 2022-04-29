@@ -8,7 +8,7 @@ namespace CodeWEB.Models
 {
     public class Book
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public string Isbn  { get; set; }
         public string? Title { get; set; }
         public int? Pages { get; set; }
