@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5tgbpmcbuikerz01mXmF7zR1HRQoyyi/BOMnwxafOlLQBdooEuCKiv/Og/LurDwlqGmtC3kLhV8Q5ccba5o3MQ==",
+  "dgSpecHash": "bJfFKElOjPquG6OJid1M3LeIuXInu5sJqzGmYpet0KV7q5goX3WAbZGa1+LZqP2MGAwUOaNpv1JuCj8e6Xq9iA==",
   "success": true,
-  "projectFilePath": "D:\\study\\IT\\appdev\\1_Lecture 1_S\\StoreBook\\StoreLibrary\\StoreLibrary\\StoreLibrary.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\StoreLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\mailkit\\3.2.0\\mailkit.3.2.0.nupkg.sha512",

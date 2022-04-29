@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CodeWEB.Models;
 using StoreLibrary.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StoreLibrary.Controllers
 {
@@ -16,11 +17,39 @@ namespace StoreLibrary.Controllers
     {
         private readonly StoreLibraryContext _context;
         private readonly UserManager<StoreLibraryUser> _userManager;
+        private readonly StoreLibraryContext dbcontext;
+        public List<SelectListItem> Category { get; } = new List<SelectListItem>
+          {
+              new SelectListItem { Value = "Action and Adventure", Text = "Action and Adventure" },
+              new SelectListItem { Value = "Classics", Text = "Classics" },
+              new SelectListItem { Value = "Comic Book", Text = "Comic Book" },
+              new SelectListItem { Value = "Novel", Text = "Novel" },
+              new SelectListItem { Value = "Detective", Text = "Detective" },
+              new SelectListItem { Value = "Mystery", Text = "Mystery" },
+              new SelectListItem { Value = "Fantasy", Text = "Fantasy" }
+          };
 
-        public BooksController(StoreLibraryContext context, UserManager<StoreLibraryUser> userManager)
+        public BooksController(StoreLibraryContext context, UserManager<StoreLibraryUser> userManager, StoreLibraryContext dbcontext)
         {
+            this.dbcontext = dbcontext;
             _context = context;
             _userManager = userManager;
+        }
+        public async Task<IActionResult> UserIndexAsync()
+        {
+            var storeLibraryContext = _context.Book.Include(b => b.Store);
+            return View(await storeLibraryContext.ToListAsync());
+        }
+        public async Task<IActionResult> UserSearch(string searchString = "")
+        {
+            ViewData["CurrentFilter"] = searchString;
+            var books = from s in dbcontext.Book
+                        .Include(s => s.Store)
+                        select s;
+            books = books.Where(s => s.Title.Contains(searchString));
+            List<Book> booksList = await books.ToListAsync();
+            /*ViewData["Category"] = SelectListItem(Category);*/
+            return View(books);
         }
 
         // GET: Books
@@ -51,14 +80,20 @@ namespace StoreLibrary.Controllers
         }
 
         // GET: Books/Create
+        [Authorize(Roles = "Seller")]
         public IActionResult Create()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
             var store = _context.Store
                 .Include(s => s.User)
                 .FirstOrDefault(x => x.UId == userId);
+            if(store == null)
+            {
+                return RedirectToAction("Create", "Stores", new { area = "" });
+            }
             var id = store.Id;
             ViewData["StoreId"] = new SelectList(_context.Store.Where(c => c.Id == store.Id), "Id", "Id");
+            ViewData["Category"] = new SelectList(_context.Book, "Category", "Category");
             return View();
         }
 

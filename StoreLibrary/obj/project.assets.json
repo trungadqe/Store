@@ -10150,11 +10150,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\study\\IT\\appdev\\1_Lecture 1_S\\StoreBook\\StoreLibrary\\StoreLibrary\\StoreLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\StoreLibrary.csproj",
       "projectName": "StoreLibrary",
-      "projectPath": "D:\\study\\IT\\appdev\\1_Lecture 1_S\\StoreBook\\StoreLibrary\\StoreLibrary\\StoreLibrary.csproj",
+      "projectPath": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\StoreLibrary.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\study\\IT\\appdev\\1_Lecture 1_S\\StoreBook\\StoreLibrary\\StoreLibrary\\obj\\",
+      "outputPath": "C:\\Users\\ACER\\Documents\\GitHub\\Store\\StoreLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",

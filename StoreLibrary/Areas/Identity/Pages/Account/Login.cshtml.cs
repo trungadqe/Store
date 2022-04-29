@@ -22,11 +22,13 @@ namespace StoreLibrary.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<StoreLibraryUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<StoreLibraryUser> _userManager;
 
-        public LoginModel(SignInManager<StoreLibraryUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<StoreLibraryUser> signInManager, ILogger<LoginModel> logger, UserManager<StoreLibraryUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -116,7 +118,16 @@ namespace StoreLibrary.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    StoreLibraryUser userName = await _userManager.FindByEmailAsync(Input.Email);
+                    var rolesname = await _userManager.GetRolesAsync(userName);
+                    if (rolesname.Contains("Customer"))
+                    {
+                        return RedirectToAction("UserIndex", "Home", new { area = "" });
+                    }
+                    if (rolesname.Contains("Seller"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "" });
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {
