@@ -23,10 +23,10 @@ namespace StoreLibrary.Controllers
             _userManager = userManager;
         }
 
-        [Authorize(Roles = "Seller")]
+       
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("UserIndex", "Books", new { area = "" });
         }
 
         public IActionResult Privacy()

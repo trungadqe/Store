@@ -30,6 +30,11 @@ namespace StoreLibrary.Controllers
             var Book = _context.Book.Include(b => b.Store);
             return View(await Book.ToListAsync());
         }
+        public async Task<IActionResult> CusIndexAsync()
+        {
+            var Book = _context.Book.Include(b => b.Store);
+            return View(await Book.ToListAsync());
+        }
         public async Task<IActionResult> UserSearch(string searchString = "")
         {
             ViewData["CurrentFilter"] = searchString;
