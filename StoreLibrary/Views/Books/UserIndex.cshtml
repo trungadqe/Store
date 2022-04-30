@@ -31,26 +31,6 @@
 				Header Start
 		*************************************-->
 		<header id="tg-header" class="tg-header tg-haslayout">
-			<div class="tg-topbar">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<ul class="tg-addnav">
-								<li>
-									<a href="javascript:void(0);">
-										<i class="icon-question-circle"></i>
-										<em>Help</em>
-									</a>
-								</li>
-							</ul>
-							<div class="tg-userlogin">								
-								<a><span>Hi, John</span></a>
-								<a><span>Hi, John</span></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="tg-middlecontainer">
 				<div class="container">
 					<div class="row">
@@ -58,20 +38,14 @@
 							<strong class="tg-logo"><a href="index-2.html"><img src="~/img/User/logo.png" alt="company name here"></a></strong>
 							<div class="tg-wishlistandcart">
 								<div class="dropdown tg-themedropdown tg-wishlistdropdown">
-									<a href="javascript:void(0);" id="tg-wishlisst" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span class="tg-themebadge">3</span>
-										<i class="icon-heart"></i>
-										<span>Wishlist</span>
+									<a href="/Identity/Account/Login" id="tg-wishlisst" class="tg-btnthemedropdown">
+										<span>Login</span>
 									</a>
-									<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
-										<div class="tg-description"><p>No products were added to the wishlist!</p></div>
-									</div>
 								</div>
 								<div class="dropdown tg-themedropdown tg-minicartdropdown">
 									<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span class="tg-themebadge">3</span>
-										<i class="icon-cart"></i>
-										<span>$123.00</span>
+										<span>Cart</span>
 									</a>
 									<div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart">
 										<div class="tg-minicartbody">
@@ -164,13 +138,7 @@
 										<li class="menu-item-has-children current-menu-item">
 											<a asp-controller="Book" asp-action="UserIndex" as>Home</a>
 										</li>
-										<li class="menu-item-has-children">
-											<a href="javascript:void(0);">Authors</a>
-											<ul class="sub-menu">
-												<li><a href="authors.html">Authors</a></li>
-												<li><a href="authordetail.html">Author Detail</a></li>
-											</ul>
-										</li>
+										
 										<li class="menu-item-has-children">
 											<a href="javascript:void(0);">Latest News</a>
 											<ul class="sub-menu">
@@ -179,6 +147,7 @@
 												<li><a href="newsdetail.html">News Detail</a></li>
 											</ul>
 										</li>
+
 										<li class="menu-item-has-children current-menu-item">
 											<a href="javascript:void(0);"><i class="icon-menu"></i></a>
 											<ul class="sub-menu">
@@ -214,7 +183,7 @@
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="tg-sectionhead">
 								<h2 class="font-weight-bold">Library</h2>
-								<a class="tg-btn" href="javascript:void(0);">View All</a>
+								<a class="tg-btn" asp-controller = "Books" asp-action = "CusIndex">View All</a>
 							</div>
 						</div>
 						<div id="tg-pickedbyauthorslider" class="tg-pickedbyauthor tg-pickedbyauthorslider owl-carousel">

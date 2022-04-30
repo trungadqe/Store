@@ -22,9 +22,6 @@
 	<link rel="stylesheet" href="~/css/User/main.css">
 	<link rel="stylesheet" href="~/css/User/color.css">
 	<link rel="stylesheet" href="~/css/User/responsive.css">
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/StoreLibrary.styles.css" asp-append-version="true" />
 	<script src="~/js/User/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body class="tg-home tg-homeone">
@@ -34,37 +31,17 @@
 				Header Start
 		*************************************-->
 		<header id="tg-header" class="tg-header tg-haslayout">
-						<div class="tg-topbar">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<ul class="tg-addnav">
-										<li >
-											<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" as>Home</a>
-										</li>
-										<li>
-											<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-										</li>
-										<li>
-											<a class="nav-link text-dark" asp-area="" asp-controller="Stores" asp-action="Index" as>Stores</a>
-										</li>
-										<li>
-											<a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index" as>Books</a>
-										</li>
-							</ul>
-							<div class="tg-userlogin">	
-									<a class="nav-link text-dark" id="register" href="/Identity/Account/Login">Sign in</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="tg-middlecontainer">
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<strong class="tg-logo"><a href="index-2.html"><img src="~/img/User/logo.png" alt="company name here"></a></strong>
 							<div class="tg-wishlistandcart">
+								<div class="dropdown tg-themedropdown tg-wishlistdropdown">
+									<a asp-area ="" asp-controller="Books" asp-action="UserIndex" id="tg-wishlisst" class="tg-btnthemedropdown">
+										<span>Log Out</span>
+									</a>
+								</div>
 								<div class="dropdown tg-themedropdown tg-minicartdropdown">
 									<a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span class="tg-themebadge">3</span>
@@ -75,7 +52,6 @@
 											<div class="tg-minicarproduct">
 												<figure>
 													<img src="~/img/User/products/img-01.jpg" alt="image description">
-													
 												</figure>
 												<div class="tg-minicarproductdata">
 													<h5><a href="javascript:void(0);">Our State Fair Is A Great Function</a></h5>
@@ -146,7 +122,7 @@
 								</div>
 								<div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
 									<ul>
-										<li >
+										<li class="menu-item-has-children menu-item-has-mega-menu">
 											<a href="javascript:void(0);">All Categories</a>
 											<div class="mega-menu">
 												<ul class="tg-themetabnav" role="tablist">
@@ -158,17 +134,15 @@
 												</ul>											
 											</div>
 										</li>
-										<li>
-											<a asp-controller="Book" asp-action="UserIndex" as>Home</a>
+										<li class="menu-item-has-children current-menu-item">
+											<a href="javascript:void(0);">Home</a>
 										</li>
-										<li>
-											<a href="javascript:void(0);">Authors</a>
-											<ul class="sub-menu">
-												<li><a href="authors.html">Authors</a></li>
-												<li><a href="authordetail.html">Author Detail</a></li>
-											</ul>
+
+										<li class="menu-item-has-children current-menu-item">
+											<a asp-controller = "User" asp-action = "Index">Profile</a>
 										</li>
-										<li>
+										
+										<li class="menu-item-has-children">
 											<a href="javascript:void(0);">Latest News</a>
 											<ul class="sub-menu">
 												<li><a href="newslist.html">News List</a></li>
@@ -176,7 +150,8 @@
 												<li><a href="newsdetail.html">News Detail</a></li>
 											</ul>
 										</li>
-										<li>
+										<li class="menu-item-has-children current-menu-item">
+											<a href="javascript:void(0);"><i class="icon-menu"></i></a>
 											<ul class="sub-menu">
 												<li class="menu-item-has-children">
 													<a href="aboutus.html">Products</a>
@@ -210,7 +185,7 @@
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="tg-sectionhead">
 								<h2 class="font-weight-bold">Library</h2>
-								<a class="tg-btn" href="javascript:void(0);">View All</a>
+								<a class="tg-btn" asp-controller = "Books" asp-action = "CusIndex">View All</a>
 							</div>
 						</div>
 						<div id="tg-pickedbyauthorslider" class="tg-pickedbyauthor tg-pickedbyauthorslider owl-carousel">
@@ -411,9 +386,6 @@
 	<!--************************************
 			Wrapper End
 	*************************************-->
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 	<script src="~/js/User/vendor/jquery-library.js"></script>
 	<script src="~/js/User/vendor/bootstrap.min.js"></script>
 	<script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>

@@ -21,6 +21,7 @@ namespace CodeWEB.Models
         public Store? Store { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
 
+
         [NotMapped]
         public List<SelectListItem>? CategoryList { get; set; }
 

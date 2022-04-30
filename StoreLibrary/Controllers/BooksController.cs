@@ -25,6 +25,14 @@ namespace StoreLibrary.Controllers
             _context = context;
             _userManager = userManager;
         }
+        Book book = new Book()
+        {
+            CategoryList = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "Comic", Text = "Comic"},
+                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
+                }
+        };
         public async Task<IActionResult> UserIndexAsync()
         {
             var Book = _context.Book.Include(b => b.Store);
@@ -38,34 +46,26 @@ namespace StoreLibrary.Controllers
         public async Task<IActionResult> UserSearch(string searchString = "")
         {
             ViewData["CurrentFilter"] = searchString;
-            Book book = new Book()
+            /*Book book = new Book()
             {
                 CategoryList = new List<SelectListItem>
                 {
                     new SelectListItem {Value = "Comic", Text = "Comic"},
                     new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
                 }
-            };
+            };*/
             var books = from s in dbcontext.Book
                         .Include(s => s.Store)
                         select s;
             books = books.Where(s => s.Title.Contains(searchString));
             List<Book> booksList = await books.ToListAsync();
             /*ViewData["Category"] = SelectListItem(Category);*/
-            return View(book);
+            return View(books);
         }
 
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            Book book = new Book()
-            {
-                CategoryList = new List<SelectListItem>
-                {
-                    new SelectListItem {Value = "Comic", Text = "Comic"},
-                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
-                }
-            };
             var userid = _userManager.GetUserId(HttpContext.User);
             var storeLibraryContext = _context.Book.Include(b => b.Store);
             return View(await storeLibraryContext.ToListAsync());
@@ -94,14 +94,6 @@ namespace StoreLibrary.Controllers
         [Authorize(Roles = "Seller")]
         public IActionResult Create()
         {
-            Book book = new Book()
-            {
-                CategoryList = new List<SelectListItem>
-                {
-                    new SelectListItem {Value = "Comic", Text = "Comic"},
-                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
-                }
-            };
             var userId = _userManager.GetUserId(HttpContext.User);
             var store = _context.Store
                 .Include(s => s.User)
@@ -145,6 +137,7 @@ namespace StoreLibrary.Controllers
                 .Include(s => s.User)
                 .FirstOrDefault(x => x.UId == userId);
             var id = store.Id;
+
             ViewData["StoreId"] = new SelectList(_context.Store.Where(c => c.Id == store.Id), "Id", "Id");
             return View(book);
         }
@@ -154,7 +147,7 @@ namespace StoreLibrary.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
             var book = await _context.Book.FindAsync(id);
@@ -162,6 +155,7 @@ namespace StoreLibrary.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryList"] = new SelectList(_context.Book,"Category", "Category", book.CategoryList);
             ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Id", book.StoreId);
             return View(book);
         }
@@ -220,7 +214,7 @@ namespace StoreLibrary.Controllers
 
             return View(book);
         }
-
+        
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

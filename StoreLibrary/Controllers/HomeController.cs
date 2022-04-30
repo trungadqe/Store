@@ -26,7 +26,7 @@ namespace StoreLibrary.Controllers
        
         public IActionResult Index()
         {
-            return RedirectToAction("UserIndex", "Books", new { area = "" });
+            return View();
         }
 
         public IActionResult Privacy()

@@ -15,13 +15,16 @@ namespace StoreLibrary.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
+        private readonly StoreLibraryContext _context;
         private readonly UserManager<StoreLibraryUser> _userManager;
         private readonly SignInManager<StoreLibraryUser> _signInManager;
 
         public IndexModel(
+            StoreLibraryContext context,
             UserManager<StoreLibraryUser> userManager,
             SignInManager<StoreLibraryUser> signInManager)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -59,19 +62,22 @@ namespace StoreLibrary.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
         }
 
         private async Task LoadAsync(StoreLibraryUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            
             Username = userName;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber
             };
+
+
         }
 
         public async Task<IActionResult> OnGetAsync()
