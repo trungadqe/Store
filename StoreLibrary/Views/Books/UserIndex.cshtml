@@ -1,4 +1,4 @@
-﻿@model ICollection<CodeWEB.Models.Book>
+﻿@model ICollection<StoreLibrary.Models.Book>
 @{
     Layout = null;
 }
@@ -126,11 +126,15 @@
 										<li class="menu-item-has-children menu-item-has-mega-menu">
 											<a href="javascript:void(0);">All Categories</a>
 											<div class="mega-menu">
+													@*<select asp-for="Category" class="form-control" asp-items="ViewBag.CategoryName"></select>*@
 												<ul class="tg-themetabnav" role="tablist">
+
 													<li role="presentation" class="active">
 														Chỉnh sửa
-
-														<a href="#artandphotography" aria-controls="artandphotography" role="tab" data-toggle="tab">Art &amp; Photography</a>
+														@*for (i=1; i<@ViewBag.CategoryName.count; i++){
+															<a href="#artandphotography" aria-controls="artandphotography" role="tab" data-toggle="tab">Art &amp; Photography</a>
+														<a href="#artandphotography" aria-controls="artandphotography" role="tab" data-toggle="tab">@ViewBag.CategoryName</a>
+														}*@
 													</li>
 												</ul>											
 											</div>
@@ -198,7 +202,7 @@
 											<div class="tg-description">
 												<p>@book.Desc</p>
 											</div>
-											<strong class="tg-bookcategory">Category: @book.Category</strong>
+											<strong class="tg-bookcategory">Category: @book.Category.Name</strong>
 											<strong class="tg-bookcategory">Pages: @book.Pages </strong>
 											<strong class="tg-bookprice">Price: @book.Price</strong>											
 										</div>

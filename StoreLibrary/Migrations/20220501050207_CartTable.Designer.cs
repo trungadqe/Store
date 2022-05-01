@@ -12,8 +12,8 @@ using StoreLibrary.Areas.Identity.Data;
 namespace StoreLibrary.Migrations
 {
     [DbContext(typeof(StoreLibraryContext))]
-    [Migration("20220429031130_fixkeybook")]
-    partial class fixkeybook
+    [Migration("20220501050207_CartTable")]
+    partial class CartTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,14 +27,13 @@ namespace StoreLibrary.Migrations
             modelBuilder.Entity("StoreLibrary.Models.Book", b =>
                 {
                     b.Property<string>("Isbn")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
@@ -56,9 +55,49 @@ namespace StoreLibrary.Migrations
 
                     b.HasKey("Isbn");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("StoreId");
 
                     b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("StoreLibrary.Models.Cart", b =>
+                {
+                    b.Property<string>("UId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BookIsbn")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UId", "BookIsbn");
+
+                    b.HasIndex("BookIsbn");
+
+                    b.ToTable("Cart");
+                });
+
+            modelBuilder.Entity("StoreLibrary.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("StoreLibrary.Models.Order", b =>
@@ -348,11 +387,38 @@ namespace StoreLibrary.Migrations
 
             modelBuilder.Entity("StoreLibrary.Models.Book", b =>
                 {
+                    b.HasOne("StoreLibrary.Models.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StoreLibrary.Models.Store", "Store")
                         .WithMany("Books")
                         .HasForeignKey("StoreId");
 
+                    b.Navigation("Category");
+
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("StoreLibrary.Models.Cart", b =>
+                {
+                    b.HasOne("StoreLibrary.Models.Book", "Book")
+                        .WithMany("Carts")
+                        .HasForeignKey("BookIsbn")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("StoreLibrary.Areas.Identity.Data.StoreLibraryUser", "User")
+                        .WithMany("Carts")
+                        .HasForeignKey("UId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StoreLibrary.Models.Order", b =>
@@ -445,7 +511,14 @@ namespace StoreLibrary.Migrations
 
             modelBuilder.Entity("StoreLibrary.Models.Book", b =>
                 {
+                    b.Navigation("Carts");
+
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("StoreLibrary.Models.Category", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("StoreLibrary.Models.Order", b =>
@@ -460,6 +533,8 @@ namespace StoreLibrary.Migrations
 
             modelBuilder.Entity("StoreLibrary.Areas.Identity.Data.StoreLibraryUser", b =>
                 {
+                    b.Navigation("Carts");
+
                     b.Navigation("Orders");
 
                     b.Navigation("Store");

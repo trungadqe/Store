@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodeWEB.Models
+namespace StoreLibrary.Models
 
 {
     public class Store

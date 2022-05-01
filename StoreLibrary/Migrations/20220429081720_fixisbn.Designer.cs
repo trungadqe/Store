@@ -24,7 +24,7 @@ namespace StoreLibrary.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CodeWEB.Models.Book", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Book", b =>
                 {
                     b.Property<string>("Isbn")
                         .HasColumnType("nvarchar(450)");
@@ -60,7 +60,7 @@ namespace StoreLibrary.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Order", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +84,7 @@ namespace StoreLibrary.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.OrderDetail", b =>
+            modelBuilder.Entity("StoreLibrary.Models.OrderDetail", b =>
                 {
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -102,7 +102,7 @@ namespace StoreLibrary.Migrations
                     b.ToTable("OrderDetail");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Store", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Store", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -345,16 +345,16 @@ namespace StoreLibrary.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Book", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Book", b =>
                 {
-                    b.HasOne("CodeWEB.Models.Store", "Store")
+                    b.HasOne("StoreLibrary.Models.Store", "Store")
                         .WithMany("Books")
                         .HasForeignKey("StoreId");
 
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Order", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Order", b =>
                 {
                     b.HasOne("StoreLibrary.Areas.Identity.Data.StoreLibraryUser", "User")
                         .WithMany("Orders")
@@ -363,15 +363,15 @@ namespace StoreLibrary.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.OrderDetail", b =>
+            modelBuilder.Entity("StoreLibrary.Models.OrderDetail", b =>
                 {
-                    b.HasOne("CodeWEB.Models.Book", "Book")
+                    b.HasOne("StoreLibrary.Models.Book", "Book")
                         .WithMany("OrderDetails")
                         .HasForeignKey("BookIsbn")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CodeWEB.Models.Order", "Order")
+                    b.HasOne("StoreLibrary.Models.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,11 +382,11 @@ namespace StoreLibrary.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Store", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Store", b =>
                 {
                     b.HasOne("StoreLibrary.Areas.Identity.Data.StoreLibraryUser", "User")
                         .WithOne("Store")
-                        .HasForeignKey("CodeWEB.Models.Store", "UId");
+                        .HasForeignKey("StoreLibrary.Models.Store", "UId");
 
                     b.Navigation("User");
                 });
@@ -442,17 +442,17 @@ namespace StoreLibrary.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Book", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Book", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Order", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("CodeWEB.Models.Store", b =>
+            modelBuilder.Entity("StoreLibrary.Models.Store", b =>
                 {
                     b.Navigation("Books");
                 });

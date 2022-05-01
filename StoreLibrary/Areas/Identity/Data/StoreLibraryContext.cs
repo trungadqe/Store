@@ -1,8 +1,8 @@
-﻿using CodeWEB.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StoreLibrary.Areas.Identity.Data;
+using StoreLibrary.Models;
 
 namespace StoreLibrary.Areas.Identity.Data;
 
@@ -17,6 +17,7 @@ public class StoreLibraryContext : IdentityDbContext<StoreLibraryUser>
     public DbSet<Category> Category { get; set; } = null!;
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderDetail> OrderDetail { get; set; }
+    public DbSet<Cart> Cart { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -52,5 +53,18 @@ public class StoreLibraryContext : IdentityDbContext<StoreLibraryUser>
             .HasOne<Book>(od => od.Book)
             .WithMany(b => b.OrderDetails)
             .HasForeignKey(od => od.BookIsbn);
+
+        builder.Entity<Cart>()
+            .HasKey(c => new { c.UId, c.BookIsbn });
+        builder.Entity<Cart>()
+            .HasOne<StoreLibraryUser>(c => c.User)
+            .WithMany(u => u.Carts)
+            .HasForeignKey(c => c.UId);
+        builder.Entity<Cart>()
+            .HasOne<Book>(od => od.Book)
+            .WithMany(b => b.Carts)
+            .HasForeignKey(od => od.BookIsbn)
+            .OnDelete(DeleteBehavior.NoAction);
+
     }
 }

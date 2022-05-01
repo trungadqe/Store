@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CodeWEB.Models;
 using Microsoft.AspNetCore.Identity;
+using StoreLibrary.Models;
 
 namespace StoreLibrary.Areas.Identity.Data;
 
@@ -16,5 +16,6 @@ public class StoreLibraryUser : IdentityUser
     public string? Gender { get; set; }
     public Store? Store { get; set; }
     public virtual ICollection<Order>? Orders { get; set; }
+    public virtual ICollection<Cart>? Carts { get; set; }
 }
 

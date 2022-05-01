@@ -3,7 +3,7 @@ using StoreLibrary.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodeWEB.Models
+namespace StoreLibrary.Models
 
 {
     public class Book
@@ -19,9 +19,8 @@ namespace CodeWEB.Models
         public int? StoreId { get; set; }
         public Store? Store { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
-        public int? CategoryId { get; set; }
-
-        public Category? Category { get; set; } = null!;
-
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public virtual ICollection<Cart>? Carts { get; set; }
     }
 }

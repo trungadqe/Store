@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CodeWEB.Models;
 using StoreLibrary.Areas.Identity.Data;
+using StoreLibrary.Models;
 
 namespace StoreLibrary.Controllers
 {

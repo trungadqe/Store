@@ -1,4 +1,4 @@
-﻿namespace CodeWEB.Models
+﻿namespace StoreLibrary.Models
 {
     public class Category
     {
@@ -9,6 +9,6 @@
         public string? Description { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-        public ICollection<Book>? Books { get; set; } = null!;
+        public ICollection<Book>? Books { get; set; }
     }
 }
