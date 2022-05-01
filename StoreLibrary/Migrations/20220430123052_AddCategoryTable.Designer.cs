@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreLibrary.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using StoreLibrary.Areas.Identity.Data;
 namespace StoreLibrary.Migrations
 {
     [DbContext(typeof(StoreLibraryContext))]
-    partial class StoreLibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20220430123052_AddCategoryTable")]
+    partial class AddCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace StoreLibrary.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Desc")
@@ -372,7 +374,9 @@ namespace StoreLibrary.Migrations
                 {
                     b.HasOne("CodeWEB.Models.Category", "Category")
                         .WithMany("Books")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CodeWEB.Models.Store", "Store")
                         .WithMany("Books")

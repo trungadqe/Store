@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreLibrary.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using StoreLibrary.Areas.Identity.Data;
 namespace StoreLibrary.Migrations
 {
     [DbContext(typeof(StoreLibraryContext))]
-    partial class StoreLibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20220430131755_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

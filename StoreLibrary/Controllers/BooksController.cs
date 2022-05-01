@@ -25,14 +25,6 @@ namespace StoreLibrary.Controllers
             _context = context;
             _userManager = userManager;
         }
-        Book book = new Book()
-        {
-            CategoryList = new List<SelectListItem>
-                {
-                    new SelectListItem {Value = "Comic", Text = "Comic"},
-                    new SelectListItem {Value = "Cartoon", Text = "Cartoon"},
-                }
-        };
         public async Task<IActionResult> UserIndexAsync()
         {
             var Book = _context.Book.Include(b => b.Store);
@@ -102,11 +94,12 @@ namespace StoreLibrary.Controllers
             {
                 return RedirectToAction("Create", "Stores", new { area = "" });
             }
-            var id = store.Id;
-            
+            ViewData["CategoryName"] = new SelectList(_context.Category.ToList(), "Name", "Name");
+            ViewData["StoreId"] = new SelectList(_context.Store.Where(s => s.Id == store.Id), "Id", "Id");
+            /*var id = store.Id;*/
             //ViewData["StoreId"] = new SelectList(_context.Store.Where(c => c.Id == store.Id), "Id", "Id");
-            
-            return View(book);
+
+            return View();
         }
 
         // POST: Books/Create
@@ -124,7 +117,7 @@ namespace StoreLibrary.Controllers
                 {
                     image.CopyTo(stream);
                 }
-                book.ImgUrl = imgName;
+                book.ImgUrl = "img/"+ imgName;
             }
             if (ModelState.IsValid)
             {
@@ -155,7 +148,7 @@ namespace StoreLibrary.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryList"] = new SelectList(_context.Book,"Category", "Category", book.CategoryList);
+            /*ViewData["CategoryList"] = new SelectList(_context.Book,"Category", "Category", book.CategoryList);*/
             ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Id", book.StoreId);
             return View(book);
         }

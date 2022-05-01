@@ -14,6 +14,7 @@ public class StoreLibraryContext : IdentityDbContext<StoreLibraryUser>
     }
     public DbSet<Store> Store { get; set; }
     public DbSet<Book> Book { get; set; }
+    public DbSet<Category> Category { get; set; } = null!;
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderDetail> OrderDetail { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
@@ -30,6 +31,11 @@ public class StoreLibraryContext : IdentityDbContext<StoreLibraryUser>
             .HasOne<Store>(b => b.Store)
             .WithMany(st => st.Books)
             .HasForeignKey(b => b.StoreId);
+
+        builder.Entity<Book>()
+            .HasOne<Category>(b => b.Category)
+            .WithMany(c => c.Books)
+            .HasForeignKey(c => c.CategoryId);
 
         builder.Entity<Order>()
             .HasOne<StoreLibraryUser>(o => o.User)
